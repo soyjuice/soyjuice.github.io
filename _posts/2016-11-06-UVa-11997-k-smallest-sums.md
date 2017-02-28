@@ -1,7 +1,7 @@
 ---
 layout: post
 title: UVa 11997 K Smallest Sums
-categories: [NOI]
+categories: [NOI, 多路归并]
 description: 老文章
 keywords: C++, 多路归并, 暴力
 ---
@@ -63,33 +63,35 @@ For each test case, print the k smallest sums, in ascending order.
 
 因此，定义下面这个结构体来表示上述二元组。
 
-<pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>struct</span> Item
-<span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> s<span style='color:#808030; '>,</span>b<span style='color:#800080; '>;</span>
-    Item<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> s<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span> b<span style='color:#808030; '>)</span><span style='color:#800080; '>:</span>s<span style='color:#808030; '>(</span>s<span style='color:#808030; '>)</span><span style='color:#808030; '>,</span>b<span style='color:#808030; '>(</span>b<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
-    <span style='color:#800000; font-weight:bold; '>bool</span> <span style='color:#800000; font-weight:bold; '>operator</span> <span style='color:#808030; '>&lt;</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>const</span> Item<span style='color:#808030; '>&amp;</span> rhs<span style='color:#808030; '>)</span> <span style='color:#800000; font-weight:bold; '>const</span>  
-    <span style='color:#800080; '>{</span>       
-        <span style='color:#800000; font-weight:bold; '>return</span> s <span style='color:#808030; '>></span> rhs<span style='color:#808030; '>.</span>s<span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-<span style='color:#800080; '>}</span><span style='color:#800080; '>;</span>
-</pre>
+``` C++
+struct Item
+{
+    int s,b;
+    Item(int s,int b):s(s),b(b){}
+    bool operator < (const Item& rhs) const  
+    {       
+        return s > rhs.s;
+    }
+};
+```
 
 
 每次读入一组数据时，将表合并，取n次最小值；因为在取出表1的元素之前，表2对应位置的数一定要大，一定不是当前的最小值，所以当取出这个元素后，再将它同列的下一个元素入队。
 
-<pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>void</span> <span style='color:#603000; '>merge</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> A<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> B<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> C<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#808030; '>)</span>
-<span style='color:#800080; '>{</span>
-    <span style='color:#603000; '>priority_queue</span> q<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> q<span style='color:#808030; '>.</span>push<span style='color:#808030; '>(</span>Item<span style='color:#808030; '>(</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>+</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span>
-    <span style='color:#800080; '>{</span>
-        Item item<span style='color:#808030; '>=</span>q<span style='color:#808030; '>.</span>top<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>q<span style='color:#808030; '>.</span>pop<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-        C<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>=</span>item<span style='color:#808030; '>.</span>s<span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>int</span> b<span style='color:#808030; '>=</span>item<span style='color:#808030; '>.</span>b<span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>&lt;</span>n<span style='color:#808030; '>)</span> q<span style='color:#808030; '>.</span>push<span style='color:#808030; '>(</span>Item<span style='color:#808030; '>(</span>item<span style='color:#808030; '>.</span>s<span style='color:#808030; '>-</span>B<span style='color:#808030; '>[</span>b<span style='color:#808030; '>]</span><span style='color:#808030; '>+</span>B<span style='color:#808030; '>[</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-<span style='color:#800080; '>}</span>
-</pre>
+``` C++
+void merge(int* A,int* B,int* C,int n)
+{
+    priority_queue q;
+    for(int i=0;i<n;i++) q.push(Item(A[i]+B[0],0));
+    for(int i=0;i<n;i++)
+    {
+        Item item=q.top();q.pop();
+        C[i]=item.s;
+        int b=item.b;
+        if(b+1<n) q.push(Item(item.s-B[b]+B[b+1],b+1));
+    }
+}
+```
 
 
 这样，两个表的问题就解决了。如果是多个表的话，两两合并就可以。
@@ -98,51 +100,52 @@ For each test case, print the k smallest sums, in ascending order.
 
 **代码分析：**
 
-<pre style='color:#000000;background:#ffffff;'><span style='color:#004a43; '>#</span><span style='color:#004a43; '>include</span><span style='color:#800000; '>&lt;</span><span style='color:#40015a; '>bits/stdc++.h</span><span style='color:#800000; '>></span>
-<span style='color:#800000; font-weight:bold; '>using</span> <span style='color:#800000; font-weight:bold; '>namespace</span> <span style='color:#666616; '>std</span><span style='color:#800080; '>;</span>
+``` C++
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style='color:#800000; font-weight:bold; '>const</span> <span style='color:#800000; font-weight:bold; '>int</span> maxn<span style='color:#808030; '>=</span><span style='color:#008c00; '>768</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> A<span style='color:#808030; '>[</span>maxn<span style='color:#808030; '>]</span><span style='color:#808030; '>[</span>maxn<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+const int maxn=768;
+int A[maxn][maxn];
 
-<span style='color:#800000; font-weight:bold; '>struct</span> Item
-<span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> s<span style='color:#808030; '>,</span>b<span style='color:#800080; '>;</span>
-    Item<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> s<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span> b<span style='color:#808030; '>)</span><span style='color:#800080; '>:</span>s<span style='color:#808030; '>(</span>s<span style='color:#808030; '>)</span><span style='color:#808030; '>,</span>b<span style='color:#808030; '>(</span>b<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span><span style='color:#800080; '>}</span>
-    <span style='color:#800000; font-weight:bold; '>bool</span> <span style='color:#800000; font-weight:bold; '>operator</span> <span style='color:#808030; '>&lt;</span> <span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>const</span> Item<span style='color:#808030; '>&amp;</span> rhs<span style='color:#808030; '>)</span> <span style='color:#800000; font-weight:bold; '>const</span>     
-    <span style='color:#800080; '>{</span>         
-        <span style='color:#800000; font-weight:bold; '>return</span> s <span style='color:#808030; '>></span> rhs<span style='color:#808030; '>.</span>s<span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-<span style='color:#800080; '>}</span><span style='color:#800080; '>;</span>
+struct Item
+{
+    int s,b;
+    Item(int s,int b):s(s),b(b){}
+    bool operator < (const Item& rhs) const     
+    {         
+        return s > rhs.s;
+    }
+};
 
-<span style='color:#800000; font-weight:bold; '>void</span> <span style='color:#603000; '>merge</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> A<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> B<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span><span style='color:#808030; '>*</span> C<span style='color:#808030; '>,</span><span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#808030; '>)</span>
-<span style='color:#800080; '>{</span>
-    <span style='color:#603000; '>priority_queue</span> q<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> q<span style='color:#808030; '>.</span>push<span style='color:#808030; '>(</span>Item<span style='color:#808030; '>(</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>+</span>B<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span>
-    <span style='color:#800080; '>{</span>
-        Item item<span style='color:#808030; '>=</span>q<span style='color:#808030; '>.</span>top<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>q<span style='color:#808030; '>.</span>pop<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-        C<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>=</span>item<span style='color:#808030; '>.</span>s<span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>int</span> b<span style='color:#808030; '>=</span>item<span style='color:#808030; '>.</span>b<span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>&lt;</span>n<span style='color:#808030; '>)</span> q<span style='color:#808030; '>.</span>push<span style='color:#808030; '>(</span>Item<span style='color:#808030; '>(</span>item<span style='color:#808030; '>.</span>s<span style='color:#808030; '>-</span>B<span style='color:#808030; '>[</span>b<span style='color:#808030; '>]</span><span style='color:#808030; '>+</span>B<span style='color:#808030; '>[</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>b<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-<span style='color:#800080; '>}</span>
+void merge(int* A,int* B,int* C,int n)
+{
+    priority_queue q;
+    for(int i=0;i<n;i++) q.push(Item(A[i]+B[0],0));
+    for(int i=0;i<n;i++)
+    {
+        Item item=q.top();q.pop();
+        C[i]=item.s;
+        int b=item.b;
+        if(b+1<n) q.push(Item(item.s-B[b]+B[b+1],b+1));
+    }
+}
 
-<span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#400000; '>main</span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
-<span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span><span style='color:#603000; '>scanf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span><span style='color:#808030; '>&amp;</span>n<span style='color:#808030; '>)</span><span style='color:#808030; '>=</span><span style='color:#808030; '>=</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span>
-    <span style='color:#800080; '>{</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> 
-        <span style='color:#800080; '>{</span>
-            <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> j<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>j<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>j<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#603000; '>scanf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span><span style='color:#808030; '>&amp;</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>[</span>j<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-            <span style='color:#603000; '>sort</span><span style='color:#808030; '>(</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>+</span>n<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-        <span style='color:#800080; '>}</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#603000; '>merge</span><span style='color:#808030; '>(</span>A<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>A<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>A<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>n<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span> <span style='color:#603000; '>printf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#0000e6; '> </span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span>A<span style='color:#808030; '>[</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>]</span><span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-        <span style='color:#603000; '>printf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#0f69ff; '>\n</span><span style='color:#800000; '>"</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-    <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-</pre>
+int main()
+{
+    int n;
+    while(scanf("%d",&n)==1)
+    {
+        for(int i=0;i<n;i++) 
+        {
+            for(int j=0;j<n;j++) scanf("%d",&A[i][j]);
+            sort(A[i],A[i]+n);
+        }
+        for(int i=1;i<n;i++) merge(A[0],A[i],A[0],n);
+        for(int i=0;i<n;i++) printf("%d ",A[0][i]);
+        printf("\n");
+    }
+    return 0;
+}
+```
 
 **多路归并**可以广泛地运用于各种求**最优k解**，原理是将**多个有序表**合并成**一个有序表**，对于答案来说，其必然是一个有序表，故此算法正确，并将所有可能性考虑到。
