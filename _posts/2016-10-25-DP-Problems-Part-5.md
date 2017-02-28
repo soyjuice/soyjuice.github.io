@@ -27,16 +27,20 @@ tip：最长公共子序列也称作最长公共子串(不要求连续)，英文
 
 ## 样例输入
 
+```
 2
 asdf
 adfsd
 123abc
 abc123abc
+```
 
 ## 样例输出
 
+```
 3
 6
+```
 
 代码：
 
@@ -94,16 +98,20 @@ else f[i&amp;1][j]=max(f[(i-1)&amp;1][j],f[i&amp;1][j-1]);**
 
 ## 样例输入
 
+```
 3
 aaa
 ababc
 abklmncdefg
+```
 
 ## 样例输出
 
+```
 1
 3
 7
+```
 
 代码：
 
@@ -158,12 +166,16 @@ abklmncdefg
 
 ## 样例输入 Sample Input
 
+```
 10
 -5 3 5 8 -15 6 9 27 -36 10
+```
 
 ## 样例输出 Sample Output
 
+```
 43
+```
 
 ## 数据范围及提示 Data Size &amp; Hint
 
