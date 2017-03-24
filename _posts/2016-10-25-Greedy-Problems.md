@@ -43,7 +43,7 @@ if(t<itv[i].be)
     ans++; 
     t=itv[i].en; 
 } 
-printf(”%d\n”,&ans);
+printf("%d\n",&ans);
 ```
 
 另外，在证明贪心策略是最优解时，可以广泛的使用归纳法或是反证法（其实它更多用来证明贪心不是最优）。
@@ -70,7 +70,7 @@ while(a<=b)
     if(left) putchar(S[a++]); 
     else putchar(S[b--]); 
 } 
-putchar(‘\n’);
+putchar('\n');
 ```
 
 2.相似的字典序问题，如POJ 3617 Best Cow Line。
