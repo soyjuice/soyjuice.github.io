@@ -12,14 +12,13 @@ keywords: 贪心
 <!--more-->
 分析：尽可能多的使用大面值的硬币，因为同样的价值所需的硬币中，使用大面值一定少于使用小面值的数量（也许这些小面值还可以拼成一个大面值）。
 
-<pre style='color:#000000;background:#ffffff;'><input id="code_pre1" class="code_button" type="button" onClick="open_code(1)" value="Code+"/><input id="code_re1" class="code_button" type="button" onClick="merge_code(1)" value="Code-" style="display:none;"/>
 <div id="code_set1" style="display:none;"><span style='color:#800000; font-weight:bold; '>int</span> ans<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
 <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>5</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>></span><span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>-</span><span style='color:#808030; '>-</span><span style='color:#808030; '>)</span>
 <span style='color:#800080; '>{</span>
     <span style='color:#800000; font-weight:bold; '>int</span> t<span style='color:#808030; '>=</span><span style='color:#603000; '>min</span><span style='color:#808030; '>(</span>A<span style='color:#808030; '>/</span>V<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>,</span>C<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
     A<span style='color:#808030; '>-</span><span style='color:#808030; '>=</span>t<span style='color:#808030; '>*</span>V<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
     ans<span style='color:#808030; '>+</span><span style='color:#808030; '>=</span>t<span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span></div></pre>
+<span style='color:#800080; '>}</span></div>
 
 2.相似的选取最大值，比如UVa 11292 The Dargon of Loowater。
 
@@ -29,7 +28,6 @@ keywords: 贪心
 
 分析：每次选择时间结束最早的，在同等条件（仅仅是一个工作）下，选择结束最早的工作，因为完成一个工作后，剩下的时间越长，还可以做的工作就有可能会更多，就一定是最优。
 
-<pre style='color:#000000;background:#ffffff;'><input id="code_pre2" class="code_button" type="button" onClick="open_code(2)" value="Code+"/><input id="code_re2" class="code_button" type="button" onClick="merge_code(2)" value="Code-" style="display:none;"/>
 <div id="code_set2" style="display:none;"><span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>i<span style='color:#808030; '>&lt;</span>N<span style='color:#800080; '>;</span>i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span>
 <span style='color:#800080; '>{</span>
     itv<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>be<span style='color:#808030; '>=</span>S<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
@@ -43,7 +41,7 @@ keywords: 贪心
     t<span style='color:#808030; '>=</span>itv<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>en<span style='color:#800080; '>;</span>
 <span style='color:#800080; '>}</span>
 <span style='color:#603000; '>printf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#0f69ff; '>\n</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span><span style='color:#808030; '>&amp;</span>ans<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-</div></pre>
+</div>
 
 另外，在证明贪心策略是最优解时，可以广泛的使用归纳法或是反证法（其实它更多用来证明贪心不是最优）。
 
@@ -55,7 +53,6 @@ keywords: 贪心
 
 分析：尽可能选取字典序小的字母先放，如果前后相等，那么就选择可以较快取到小的字母的那一边。
 
-<pre style='color:#000000;background:#ffffff;'><input id="code_pre3" class="code_button" type="button" onClick="open_code(3)" value="Code+"/><input id="code_re3" class="code_button" type="button" onClick="merge_code(3)" value="Code-" style="display:none;"/>
 <div id="code_set3" style="display:none;"><span style='color:#800000; font-weight:bold; '>int</span> a<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span>b<span style='color:#808030; '>=</span>N<span style='color:#808030; '>-</span><span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
 <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>&lt;</span><span style='color:#808030; '>=</span>b<span style='color:#808030; '>)</span>
 <span style='color:#800080; '>{</span>
@@ -70,7 +67,7 @@ keywords: 贪心
     <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>left<span style='color:#808030; '>)</span> <span style='color:#603000; '>putchar</span><span style='color:#808030; '>(</span>S<span style='color:#808030; '>[</span>a<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
     <span style='color:#800000; font-weight:bold; '>else</span> <span style='color:#603000; '>putchar</span><span style='color:#808030; '>(</span>S<span style='color:#808030; '>[</span>b<span style='color:#808030; '>-</span><span style='color:#808030; '>-</span><span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
 <span style='color:#800080; '>}</span>
-<span style='color:#603000; '>putchar</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>'\n'</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span></div></pre>
+<span style='color:#603000; '>putchar</span><span style='color:#808030; '>(</span><span style='color:#0000e6; '>'\n'</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span></div>
 
 2.相似的字典序问题，如POJ 3617 Best Cow Line。
 
