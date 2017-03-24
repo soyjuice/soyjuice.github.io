@@ -9,7 +9,7 @@ keywords: 贪心
 ## 硬币问题
 
 1.有1元、5元、10元、50元、100元与500元的硬币各C<sub>1</sub>、C<sub>5</sub>、C<sub>10</sub>、C<sub>50</sub>、C<sub>100</sub>、C<sub>500</sub>枚，现在要用这些硬币来支付A元，最少需要多少枚硬币？假定至少有支付方案。
-<!--more-->
+
 分析：尽可能多的使用大面值的硬币，因为同样的价值所需的硬币中，使用大面值一定少于使用小面值的数量（也许这些小面值还可以拼成一个大面值）。
 
 <div id="code_set1" style="display:none;"><span style='color:#800000; font-weight:bold; '>int</span> ans<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
