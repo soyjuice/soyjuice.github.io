@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DP Problems Part 3
+title: 动态规划专练（三）
 categories: [NOI, 动态规划]
 description: 老文章
 keywords: C++, 动态规划
