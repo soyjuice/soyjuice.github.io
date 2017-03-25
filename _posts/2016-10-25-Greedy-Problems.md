@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 贪心专练
-categories: [贪心]
+categories: 贪心
 description: 老文章
 keywords: 贪心
 ---
