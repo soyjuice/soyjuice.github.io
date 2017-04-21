@@ -37,4 +37,48 @@ keywords: C++, 学习笔记
 
 ## 两个术语————API与SDK
 
+### API初识
+
+API是微软提供的便于程序开发的各种各样的函数（可能有1000多种。。。），这些函数是Windows操作系统提供给应用程序的接口，一般情况下，一个好的程序员善于查询某个函数的作用，这就需要MSDN帮助文档了。
+
+### SDK初识
+
+SDK全称是Software Development Kit，就是软件开发包，例如DirectX SDK，它就是用DirectX进行开发的一个资源的打包集合。
+
+后面讲到游戏引擎时，可以使用[ogre](http://www.ogre3d.org)，下载最新版本的ogre SDK。
+
+## Windows程序中的main函数
+
+Windows程序中也有类似于DOS程序中main()函数的WinMain()函数，WinMain()函数是所有Windows程序的入口点函数。
+
+``` cpp
+int WINAPI WinMain
+(
+    _In_ HINSTANCE hInstance,
+    _In_ HINSTANCE hPrevInstance,
+    _In_ LPSTR lpCmdLine,
+    _In_ int nCmdShow
+);
+```
+
+其中int后的WINAPI可以忽略，它在WinDef.h中定义是：
+
+``` cpp
+#define WINAPI __stdcall
+#define CALLBACK __stdcall
+```
+
+可以看出也可以用CALLBACK代替。
+
+另外函数的每个参数前的_In可以理解为一个宏，表示需要我们进行自行输入（input）的一个参数，与其对应的是_Out,表示这个参数是函数本身向外输出（output）的一个参数。
+
+下面是各个参数的作用：
+
+|类型|参数|介绍|
+|----|----|----|
+|HINSTANCE|hInstance|表示该程序当前运行的实例句柄|
+|HINSTANCE|hPrevInstance|表示当前实例的前一个实例的句柄|
+|LPSTR|lpCmdLine|一个以空终止的字符串，指定传递给运用程序的命令行参数|
+|int|nCmdShow|指定程序窗口如何显示，如SW_HIDE(0,隐藏),SW_MAXIMIZE(3,最大化)|
+
 ## 未完待续
