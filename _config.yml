@@ -93,7 +93,7 @@ weibo_username: soyjuice
 #      Comments    #
 # ---------------- #
 # support provider: disqus, duoshuo
-comments_provider: duoshuo
+comments_provider: disqus
 # !!!重要!!! 请修改下面两个用户名为你自己申请的
 # !!!Important!!! Please modify usernames below to yours
 duoshuo_username: soyjuice
@@ -104,8 +104,8 @@ lazy_load_duoshuo: true
 # ---------------- #
 #    Analytics     #
 # ---------------- #
-google:
-    analytics_id: UA-92797833-1
+#google:#
+#   analytics_id: #
 
 # ---------------- #
 #      Datas       #
