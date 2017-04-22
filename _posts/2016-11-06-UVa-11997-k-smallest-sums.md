@@ -63,7 +63,7 @@ For each test case, print the k smallest sums, in ascending order.
 
 因此，定义下面这个结构体来表示上述二元组。
 
-``` C++
+``` cpp
 struct Item
 {
     int s,b;
@@ -78,7 +78,7 @@ struct Item
 
 每次读入一组数据时，将表合并，取n次最小值；因为在取出表1的元素之前，表2对应位置的数一定要大，一定不是当前的最小值，所以当取出这个元素后，再将它同列的下一个元素入队。
 
-``` C++
+``` cpp
 void merge(int* A,int* B,int* C,int n)
 {
     priority_queue q;
@@ -100,7 +100,7 @@ void merge(int* A,int* B,int* C,int n)
 
 **代码分析：**
 
-``` C++
+``` cpp
 #include<bits/stdc++.h>
 using namespace std;
 
