@@ -3,17 +3,17 @@
 /*选中框*/
 ::selection 
 {
-    background:#6aa84f;
+    background:#33cccc;
     color:#fff;
 }
 ::-moz-selection 
 {
-    background:#6aa84f;
+    background:#33cccc;
     color:#fff;
 }
 ::-webkit-selection 
 {
-    background:#6aa84f;
+    background:#33cccc;
     color:#fff;
 }
 
