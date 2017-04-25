@@ -83,7 +83,7 @@ int WINAPI WinMain
 
 另外，通过对nCmdShow这个值进行设置，可以使游戏窗口更加个性化。
 
-##简单的实验
+## 简单的实验
 
 ``` cpp
 #include<windows.h>
