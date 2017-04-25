@@ -142,6 +142,6 @@ _In_opt后面的_opt_，表示可选的（Optional）,二个词合在一起就�
 
 总而言之，句柄很常用，例如窗口由窗口句柄（HWND）标识，我们要对某个窗口进行操作，首先要得到它的句柄；句柄的种类也很多，比如画刷句柄（HBRUSH）、图标句柄（HICON）、光标句柄（HCURSOR）等。
 
-想要更多地了解句柄，参见[句柄_百度百科](http://baike.baidu.com/item/%E5%8F%A5%E6%9F%84?_blank)、[句柄 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%8F%A5%E6%9F%84?_blank)。
+想要更多地了解句柄，参见[句柄_百度百科](http://baike.baidu.com/item/%E5%8F%A5%E6%9F%84){:target="_blank"}、[句柄 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%8F%A5%E6%9F%84?){:target="_blank"}。
 
 ——Soy Juice，2017.4.18~2017.4.25，学校机房。
