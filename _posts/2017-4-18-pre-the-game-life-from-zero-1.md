@@ -75,10 +75,48 @@ int WINAPI WinMain
 下面是各个参数的作用：
 
 |类型|参数|介绍|
-|----|----|----|
+|:--:|:--:|----|
 |HINSTANCE|hInstance|表示该程序当前运行的实例句柄|
 |HINSTANCE|hPrevInstance|表示当前实例的前一个实例的句柄|
 |LPSTR|lpCmdLine|一个以空终止的字符串，指定传递给运用程序的命令行参数|
-|int|nCmdShow|指定程序窗口如何显示，如SW_HIDE(0,隐藏),SW_MAXIMIZE(3,最大化)|
+|int|nCmdShow|指定程序窗口如何显示，如SW_HIDE(0,隐藏),SW_MAXIMIZE(3,最大化),|
+
+另外，通过对nCmdShow这个值进行设置，可以使游戏窗口更加个性化。
+
+##简单的实验
+
+``` cpp
+#include<windows.h>
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	MessageBox(NULL, "开始学习吧，Soy Juice！", "简单的实验", 0);
+	
+	return 0;
+}
+```
+
+其中的MessageBox就是大家经常见到的消息框，函数原型是：
+
+``` cpp
+int WINAPI MessageBox(
+    _In_opt_ HWND hWnd,
+    _In_opt_ LPCTSTR lpText,
+    _In_opt_ LPCTSTR lpCaption,
+    _In_ UINT uType
+);
+```
+
+_In_opt_后面的_opt_，表示可选的（Optional）,二个词合在一起就表示“可选的输入参数”，也就是说可以像上面那样自己填内容。
+
+|类型|参数|介绍|
+|:--:|:--:|----|
+|HWND|hWnd|表示我们显示消息框所属的窗口的句柄|
+|LPCTSTR|lpText|显而易见|
+|LPCTSTR|lpCaption|同样显而易见|
+|UINT|uType|表示消息框的样式（可以自己查一下有哪些，不写了，打字太累，请原谅一个蒟蒻的懒）|
+
+还有一个重要的事是，当要输入带双引号的字符串时，切记根据IDE的
+使用的字符集而适时添加L在双引号前，如'L"开始学习吧，Soy Juice！"'
 
 ## 未完待续
