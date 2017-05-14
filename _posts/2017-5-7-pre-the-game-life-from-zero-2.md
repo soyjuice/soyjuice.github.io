@@ -27,18 +27,18 @@ keywords: C++, 学习笔记
 ``` cpp
 typedef struct WNDCLASSEX 
 {
-	UINT cbSize;
-	UINT style;
-	WNDPROC lpfnWndProc;
-	int cbClsExtra;
-	int cbWndExtra;
-	HINSTANCE hInstance;
-	HICON hIcon;
-	HCURSOR hCursor;
-	HBRUSH hbrBackground;
-	LPCTSTR lpszMenuName;
-	LPCTSTR lpszClassName;
-	HICON hIconSm;
+    UINT cbSize;
+    UINT style;
+    WNDPROC lpfnWndProc;
+    int cbClsExtra;
+    int cbWndExtra;
+    HINSTANCE hInstance;
+    HICON hIcon;
+    HCURSOR hCursor;
+    HBRUSH hbrBackground;
+    LPCTSTR lpszMenuName;
+    LPCTSTR lpszClassName;
+    HICON hIconSm;
 } WNDCLASSEX, *PWNDCLASSEX;
 ```
 
@@ -106,8 +106,8 @@ wndClass.hInstance = hInstance;
 
 ``` cpp
 HICON WINAPI LoadIcon(
-	_In_opt_ HINSTANCE hInstance,
-	_In_ LPCTSTR lpIconName
+    _In_opt_ HINSTANCE hInstance,
+    _In_ LPCTSTR lpIconName
 );
 ```
 
@@ -123,8 +123,8 @@ wndClass.hIcon = (HICON)::LoadImage(NULL, "icon.ico", IMAGE_ICON, 0, 0, LR_DEFAU
 
 ``` cpp
 HCURSOR WINAPI LoadCursor(
-	_In_opt_ HINSTANCE hInstance,
-	_In_ LPCTSTR lpCursorName
+    _In_opt_ HINSTANCE hInstance,
+    _In_ LPCTSTR lpCursorName
 );
 ```
 
@@ -138,7 +138,7 @@ wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 
 ``` cpp
 HGDIOBJ GetStockObject(
-	__in int fnObject
+    __in int fnObject
 );
 ```
 
@@ -183,7 +183,7 @@ wndClass.hIconSm = NULL;
 
 ``` cpp
 ATON WINAPI RegisterClassEX(
-	_In_ const WNDCLASSEX *lpwcx
+    _In_ const WNDCLASSEX *lpwcx
 );
 ```
 
@@ -199,17 +199,17 @@ RegisterClassEX(&wndClass);
 
 ``` cpp
 HWND WINAPI CreateWindow(
-	_In_opt_ LPCTSTR lpClassName,//
-	_In_opt_ LPCTSTR lpWindowName,
-	_In_ DWORD dwStyle,
-	_In_ int x,
-	_In_ int y,
-	_In_ int nWidth,
-	_In_ int nHeight,
-	_In_opt_ HWND hWndParent,
-	_In_opt_ HMENU hMenu,
-	_In_opt_ HANDLE hlnstance,
-	_In_opt_ LPVOID lpParam
+    _In_opt_ LPCTSTR lpClassName,//
+    _In_opt_ LPCTSTR lpWindowName,
+    _In_ DWORD dwStyle,
+    _In_ int x,
+    _In_ int y,
+    _In_ int nWidth,
+    _In_ int nHeight,
+    _In_opt_ HWND hWndParent,
+    _In_opt_ HMENU hMenu,
+    _In_opt_ HANDLE hlnstance,
+    _In_opt_ LPVOID lpParam
 );
 ```
 
