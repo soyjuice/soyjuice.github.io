@@ -94,9 +94,9 @@ int WINAPI WinMain
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	MessageBox(NULL, "开始学习吧，Soy Juice！", "简单的实验", 0);
-	
-	return 0;
+    MessageBox(NULL, "开始学习吧，Soy Juice！", "简单的实验", 0);
+    
+    return 0;
 }
 ```
 
@@ -143,5 +143,29 @@ _In_opt后面的_opt_，表示可选的（Optional）,二个词合在一起就�
 总而言之，句柄很常用，例如窗口由窗口句柄（HWND）标识，我们要对某个窗口进行操作，首先要得到它的句柄；句柄的种类也很多，比如画刷句柄（HBRUSH）、图标句柄（HICON）、光标句柄（HCURSOR）等。
 
 想要更多地了解句柄，参见[句柄_百度百科](http://baike.baidu.com/item/%E5%8F%A5%E6%9F%84){:target="_blank"}、[句柄 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%8F%A5%E6%9F%84?){:target="_blank"}。
+
+## Windows程序的“邮局”——消息与消息队列
+
+Windows程序是基于事件驱动方式的程序设计模式，Windows程序与操作系统之间的通信主要是基于消息的，消息产生后进入消息队列（FIFO表），然后一个个处理。
+
+### 消息的表示形式——MSG结构体
+
+``` cpp
+typedef struct tagMSG
+{
+    HWND hwnd; //指定消息所属窗口
+    UINT message; //指定消息的标识符
+    WPARAM wParam; //指定此消息的附加信息
+    LPARAM lParam; //指定此消息的附加信息
+    DWORD time; //指定投递到消息队列的时间
+    POINT pt; //指定投递到消息队列中时鼠标的当前位置
+} MSG;
+```
+
+关于`UINT message;`，也是可以使用特定的宏，如`WM_RBUTTONDOWN`（鼠标右键按下的消息）、`WM_LBUTTONDOWN`（鼠标左键按下的消息）、`WM_QUIT`（退出消息）、`WM_KEYDOWN`（键盘按下的消息）。
+
+### 消息队列
+
+顾名思义，是个队列。
 
 ——Soy Juice，2017.4.18~2017.4.25，学校机房。
