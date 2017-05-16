@@ -200,20 +200,103 @@ RegisterClassEX(&wndClass);
 
 ``` cpp
 HWND WINAPI CreateWindow(
-    _In_opt_ LPCTSTR lpClassName,//
+    _In_opt_ LPCTSTR lpClassName,
+    //对应窗口类的名称
     _In_opt_ LPCTSTR lpWindowName,
+    //创建的窗口的名字
     _In_ DWORD dwStyle,
+    //创建的窗口的样式，跟上文style不同的是，style指定所有窗口的样式，而dwStyle指定某个具体的窗口
     _In_ int x,
+    //水平位置
     _In_ int y,
+    //竖直位置
     _In_ int nWidth,
+    //窗口高度
     _In_ int nHeight,
+    //窗口宽度
     _In_opt_ HWND hWndParent,
+    //父窗口句柄，可选可不选，一般设为NULL
     _In_opt_ HMENU hMenu,
-    _In_opt_ HANDLE hlnstance,
+    //窗口菜单的资源句柄
+    _In_opt_ HANDLE hInstance,
+    //参见WinMain的参数
     _In_opt_ LPVOID lpParam
+    //其实我没看懂，设成NULL好了
 );
 ```
 
+偷懒写在代码上的感觉真好~
 
+代码上就这么写好了：
 
-——Soy Juice，2017.5.7~，学校机房。
+``` cpp
+HWND hWnd = CreateWindow("This is a test",
+    "This is a test",
+    WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800,
+    600, NULL, NULL, hInstance, NULL
+);
+```
+
+### 窗口的显示和更新
+
+#### 改变窗口位置和大小
+
+废话少说，直接上函数
+
+``` cpp
+BOOL WINAPI MoveWindow(
+    _In_ HWND hWnd,
+    //设为创建的窗口的句柄
+    _In_ int X,
+    _In_ int Y,
+    _In_ int nWidth,
+    _In_ int nHeight,
+    //以上四个同上
+    _In_ BOOL bRepaint
+    //指定了是否重画窗口，如果为true，会使窗口接收到一条WM_PAINT消息；反之，不进行重画
+);
+```
+
+#### 显示窗口
+
+创建完后，当然需要显示出来，这就需要
+
+``` cpp
+BOOL WINAPI ShowWindow(
+    _In_ HWND hWnd,
+    //同上
+    _In_ int nCmdShow
+    //参见WinMain的参数
+);
+```
+
+#### 更新窗口
+
+最后如果要彻底完成窗口的改动，需要在上两个函数后加上以下函数
+
+``` cpp
+BOOL UpdateWindow(
+    __in HWND hWnd
+    //同上上
+);
+```
+
+用它完成收尾工作，就好比买了新房子要装修一样（作者按：教材书作者生动的比喻）
+
+### 窗口的显示和更新的总结
+
+总结代码如下：
+
+``` cpp
+MoveWindow(hWnd, 200, 50, 800, 600, true);
+ShowWindow(hWnd, nShowCmd);
+UpdateWindow(hWnd);
+```
+
+## 全文总结
+
+经过详尽而细致地学习，我对如何创建窗口有了一定的了解。
+
+不过在实际编程中，窗口的创建是每个Windows程序必有的，一般的IDE都会在新建的项目代码中直接加入固定的模（tao）板（lu），所以说，并不需要去背代码（原谅我的懒）
+
+——Soy Juice，2017.5.7~2017.5.16，学校机房。
