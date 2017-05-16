@@ -3,6 +3,7 @@ layout: post
 title: 动态规划专练（二）
 categories: [NOI, 动态规划]
 description: 老文章
+mini-description: 依然非常简单的DP
 keywords: C++, 动态规划
 ---
 
@@ -50,29 +51,31 @@ keywords: C++, 动态规划
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">30</span><span style="color:#800080;">;</span>
+const int up=30;
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span> 
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> a<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>n<span style="color:#808030;">,</span>ans<span style="color:#808030;">=</span><span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>a<span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> a<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>f<span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> f<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+int main() 
+{
+    int a[up],f[up],n,ans=-1;
+    memset(a,0,sizeof a);
+    memset(f,0,sizeof f);
 
-    <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>n<span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>i<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>a<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span>i<span style="color:#800080;">;</span>j<span style="color:#808030;">&gt;</span><span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">-</span><span style="color:#808030;">-</span><span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">+</span>a<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
+    cin>>n;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=i;j++) cin>>a[j];
+        for(int j=i;j>=1;j--) f[j]=max(f[j],f[j-1])+a[j];
+    }
 
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> ans<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>ans<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">cout</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>ans<span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span><span style="color:#603000;">endl</span><span style="color:#800080;">;</span>
+    for(int i=1;i<=n;i++) ans=max(ans,f[i]);
+    cout<<ans<<endl;
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    return 0;
+}
+```
 
 
 # 2.三取方格数
@@ -131,40 +134,43 @@ JerryZhou同学经常改编习题给自己做。
 多进程DP
 
 代码：
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">20</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">int</span> n<span style="color:#808030;">,</span>a<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span><span style="color:#008c00;">2</span><span style="color:#808030;">*</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+const int up=20 +5;
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>n<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-            <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    f<span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+int n,a[up][up],f[2*up][up][up][up];
 
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> s<span style="color:#808030;">=</span><span style="color:#008c00;">2</span><span style="color:#800080;">;</span>s<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span><span style="color:#008c00;">2</span><span style="color:#808030;">*</span>n<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>s<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> x1<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>s<span style="color:#808030;">-</span>n<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>x1<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span><span style="color:#603000;">min</span><span style="color:#808030;">(</span>n<span style="color:#808030;">,</span>s<span style="color:#808030;">)</span><span style="color:#800080;">;</span>x1<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-            <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> x2<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>s<span style="color:#808030;">-</span>n<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>x2<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span><span style="color:#603000;">min</span><span style="color:#808030;">(</span>n<span style="color:#808030;">,</span>s<span style="color:#808030;">)</span><span style="color:#800080;">;</span>x2<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-                <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> x3<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>s<span style="color:#808030;">-</span>n<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>x3<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span><span style="color:#603000;">min</span><span style="color:#808030;">(</span>n<span style="color:#808030;">,</span>s<span style="color:#808030;">)</span><span style="color:#800080;">;</span>x3<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-                <span style="color:#800080;">{</span>
-                    <span style="color:#696969;">//s=x+y-1</span>
-                    <span style="color:#800000;font-weight:bold;">int</span> mid<span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x1<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">+</span>a<span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x2<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">+</span>a<span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x3<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>x1<span style="color:#808030;">=</span><span style="color:#808030;">=</span>x2<span style="color:#808030;">)</span> mid<span style="color:#808030;">-</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x1<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>x1<span style="color:#808030;">=</span><span style="color:#808030;">=</span>x3<span style="color:#808030;">)</span> mid<span style="color:#808030;">-</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x1<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>x2<span style="color:#808030;">=</span><span style="color:#808030;">=</span>x3<span style="color:#808030;">)</span> mid<span style="color:#808030;">-</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x2<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>x1<span style="color:#808030;">=</span><span style="color:#808030;">=</span>x2 <span style="color:#808030;">&amp;</span><span style="color:#808030;">&amp;</span> x2<span style="color:#808030;">=</span><span style="color:#808030;">=</span>x3<span style="color:#808030;">)</span> mid<span style="color:#808030;">+</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>s<span style="color:#808030;">-</span>x1<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#800080;">;</span><span style="color:#696969;">//容斥原理</span>
-                    f<span style="color:#808030;">[</span>s<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>s<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-                    f<span style="color:#808030;">[</span>s<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x1<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x2<span style="color:#808030;">]</span><span style="color:#808030;">[</span>x3<span style="color:#808030;">]</span><span style="color:#808030;">+</span><span style="color:#808030;">=</span>mid<span style="color:#800080;">;</span>
-                <span style="color:#800080;">}</span>
+int main()
+{
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+        for(int j=1;j<=n;j++)
+            scanf("%d",&a[i][j]);
+    f[1][1][1][1]=a[1][1];
 
-    <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span><span style="color:#008c00;">2</span><span style="color:#808030;">*</span>n<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+    for(int s=2;s<=2*n-1;s++)
+        for(int x1=max(1,s-n+1);x1<=min(n,s);x1++)
+            for(int x2=max(1,s-n+1);x2<=min(n,s);x2++)
+                for(int x3=max(1,s-n+1);x3<=min(n,s);x3++)
+                {
+                    //s=x+y-1
+                    int mid=a[x1][s-x1+1]+a[x2][s-x2+1]+a[x3][s-x3+1];
+                    if(x1==x2) mid-=a[x1][s-x1+1];
+                    if(x1==x3) mid-=a[x1][s-x1+1];
+                    if(x2==x3) mid-=a[x2][s-x2+1];
+                    if(x1==x2 && x2==x3) mid+=a[x1][s-x1+1];//容斥原理
+                    f[s][x1][x2][x3]=max(f[s-1][x1][x2][x3],max(f[s-1][x1][x2][x3-1],max(f[s-1][x1][x2-1][x3],max(f[s-1][x1][x2-1][x3-1],max(f[s-1][x1-1][x2][x3],max(f[s-1][x1-1][x2][x3-1],max(f[s-1][x1-1][x2-1][x3],f[s-1][x1-1][x2-1][x3-1])))))));
+                    f[s][x1][x2][x3]+=mid;
+                }
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    printf("%d",f[2*n-1][n][n][n]);
+
+    return 0;
+}
+```
 
 **注**：
 
@@ -191,122 +197,123 @@ JerryZhou同学经常改编习题给自己做。
 > *   headIndex[i] 指向的是起点为 i 的头一条边在E中的位置
 > *   used, dist, queue, prev 用于最长路算法，其中 prev[i] 记录最长路中通往点 i 的边在E中的位置
 
-<pre style='color:#000000;background:#ffffff;'><span style='color:#004a43; '>#</span><span style='color:#004a43; '>include </span><span style='color:#800000; '>&lt;</span><span style='color:#40015a; '>bits/stdc++.h</span><span style='color:#800000; '>></span>
-<span style='color:#004a43; '>#</span><span style='color:#004a43; '>define</span><span style='color:#004a43; '> NIL </span><span style='color:#808030; '>-</span><span style='color:#004a43; '>1</span>
-<span style='color:#004a43; '>#</span><span style='color:#004a43; '>define</span><span style='color:#004a43; '> MAX_CAPACITY 3</span>
-<span style='color:#004a43; '>#</span><span style='color:#004a43; '>define</span><span style='color:#004a43; '> INF 10000000</span>
-<span style='color:#004a43; '>#</span><span style='color:#004a43; '>define</span><span style='color:#004a43; '> MIN</span><span style='color:#808030; '>(</span><span style='color:#004a43; '>a</span><span style='color:#808030; '>,</span><span style='color:#004a43; '>b</span><span style='color:#808030; '>)</span><span style='color:#004a43; '> </span><span style='color:#808030; '>(</span><span style='color:#808030; '>(</span><span style='color:#004a43; '>a</span><span style='color:#808030; '>)</span><span style='color:#808030; '>&lt;</span><span style='color:#808030; '>(</span><span style='color:#004a43; '>b</span><span style='color:#808030; '>)</span><span style='color:#808030; '>?</span><span style='color:#808030; '>(</span><span style='color:#004a43; '>a</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span><span style='color:#808030; '>(</span><span style='color:#004a43; '>b</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span>
-<span style='color:#800000; font-weight:bold; '>using</span> <span style='color:#800000; font-weight:bold; '>namespace</span> <span style='color:#666616; '>std</span><span style='color:#800080; '>;</span>
+``` cpp
+#include <bits/stdc++.h>
+#define NIL -1
+#define MAX_CAPACITY 3
+#define INF 10000000
+#define MIN(a,b) ((a)<(b)?(a):(b))
+using namespace std;
 
-<span style='color:#800000; font-weight:bold; '>typedef</span> <span style='color:#800000; font-weight:bold; '>struct</span><span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> next<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> from<span style='color:#808030; '>,</span> to<span style='color:#808030; '>,</span> value<span style='color:#808030; '>,</span> f<span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span> edge<span style='color:#800080; '>;</span>
+typedef struct{
+    int next;
+    int from, to, value, f;
+} edge;
 
-edge E<span style='color:#808030; '>[</span><span style='color:#008c00; '>5000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> headIndex<span style='color:#808030; '>[</span><span style='color:#008c00; '>1000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> size <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
+edge E[5000];
+int headIndex[1000];
+int size = 0;
 
-<span style='color:#800000; font-weight:bold; '>short</span> used<span style='color:#808030; '>[</span><span style='color:#008c00; '>1000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#603000; '>queue</span><span style='color:#808030; '>[</span><span style='color:#008c00; '>10000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> dist<span style='color:#808030; '>[</span><span style='color:#008c00; '>1000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> prev<span style='color:#808030; '>[</span><span style='color:#008c00; '>1000</span><span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
+short used[1000];
+int queue[10000];
+int dist[1000];
+int prev[1000];
 
-<span style='color:#800000; font-weight:bold; '>void</span> addEdge1<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> from<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> to<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> value<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> capacity<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>void</span> addEdge<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> from<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> to<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> value<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> capacity<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> maxPath<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> source<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> sink<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> numV<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-<span style='color:#800000; font-weight:bold; '>int</span> maxValueFlow<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> source<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> sink<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> numV<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+void addEdge1(int from, int to, int value, int capacity);
+void addEdge(int from, int to, int value, int capacity);
+int maxPath(int source, int sink, int numV);
+int maxValueFlow(int source, int sink, int numV);
 
-<span style='color:#800000; font-weight:bold; '>int</span> <span style='color:#400000; '>main</span><span style='color:#808030; '>(</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> n<span style='color:#808030; '>,</span> numV<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> x<span style='color:#808030; '>,</span> y<span style='color:#808030; '>,</span> source<span style='color:#808030; '>,</span> sink<span style='color:#808030; '>,</span> value<span style='color:#800080; '>;</span>
+int main(){
+    int n, numV;
+    int x, y, source, sink, value;
 
-    <span style='color:#603000; '>scanf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>&amp;</span>n<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
+    scanf("%d", &n);
 
-    <span style='color:#696969; '>/*initialize*/</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>x<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> x<span style='color:#808030; '>&lt;</span><span style='color:#008c00; '>1000</span><span style='color:#800080; '>;</span> x<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span>
-        headIndex<span style='color:#808030; '>[</span>x<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> NIL<span style='color:#800080; '>;</span>
+    /*initialize*/
+    for(x=0; x<1000; x++)
+        headIndex[x] = NIL;
 
-    <span style='color:#696969; '>/*build the network*/</span>
-    numV <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>x<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> x<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span> x<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>y<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> y<span style='color:#808030; '>&lt;</span>n<span style='color:#800080; '>;</span> y<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-            <span style='color:#603000; '>scanf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span> <span style='color:#808030; '>&amp;</span>value<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-            addEdge<span style='color:#808030; '>(</span>numV<span style='color:#808030; '>,</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> value<span style='color:#808030; '>,</span> <span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>//connect numV &amp; numV+1</span>
-            addEdge<span style='color:#808030; '>(</span>numV<span style='color:#808030; '>,</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> MAX_CAPACITY<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-            <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>x <span style='color:#808030; '>&lt;</span> n<span style='color:#808030; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span>
-                addEdge<span style='color:#808030; '>(</span>numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>*</span>n<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> MAX_CAPACITY<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>//connnect numV+1 &amp; its downer neighbour, if exists</span>
-            <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>y <span style='color:#808030; '>&lt;</span> n<span style='color:#808030; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>)</span>
-                addEdge<span style='color:#808030; '>(</span>numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> MAX_CAPACITY<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>//connnect numV+1 &amp; its righter neighbour, if exists</span>
-            numV <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> <span style='color:#008c00; '>2</span><span style='color:#800080; '>;</span>
-        <span style='color:#800080; '>}</span>
-    <span style='color:#800080; '>}</span>
-    source <span style='color:#808030; '>=</span> numV<span style='color:#808030; '>,</span> sink <span style='color:#808030; '>=</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
-    addEdge<span style='color:#808030; '>(</span>source<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> MAX_CAPACITY<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>//source</span>
-    addEdge<span style='color:#808030; '>(</span>numV<span style='color:#808030; '>-</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>,</span> sink<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> MAX_CAPACITY<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>  <span style='color:#696969; '>//sink</span>
+    /*build the network*/
+    numV = 0;
+    for(x=0; x<n; x++){
+        for(y=0; y<n; y++){
+            scanf("%d", &value);
+            addEdge(numV, numV+1, value, 1);  //connect numV & numV+1
+            addEdge(numV, numV+1, 0, MAX_CAPACITY);
+            if(x < n-1)
+                addEdge(numV+1, numV+2*n, 0, MAX_CAPACITY);  //connnect numV+1 & its downer neighbour, if exists
+            if(y < n-1)
+                addEdge(numV+1, numV+2, 0, MAX_CAPACITY);  //connnect numV+1 & its righter neighbour, if exists
+            numV += 2;
+        }
+    }
+    source = numV, sink = numV+1;
+    addEdge(source, 0, 0, MAX_CAPACITY);  //source
+    addEdge(numV-1, sink, 0, MAX_CAPACITY);  //sink
 
-    <span style='color:#696969; '>/*solve*/</span>
-    <span style='color:#603000; '>printf</span><span style='color:#808030; '>(</span><span style='color:#800000; '>"</span><span style='color:#007997; '>%d</span><span style='color:#0f69ff; '>\n</span><span style='color:#800000; '>"</span><span style='color:#808030; '>,</span> maxValueFlow<span style='color:#808030; '>(</span>source<span style='color:#808030; '>,</span> sink<span style='color:#808030; '>,</span> numV<span style='color:#808030; '>+</span><span style='color:#008c00; '>2</span><span style='color:#808030; '>)</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>return</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-<span style='color:#800000; font-weight:bold; '>void</span> addEdge1<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> from<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> to<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> value<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> capacity<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-    E<span style='color:#808030; '>[</span>size<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>from <span style='color:#808030; '>=</span> from<span style='color:#800080; '>;</span>
-    E<span style='color:#808030; '>[</span>size<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to <span style='color:#808030; '>=</span> to<span style='color:#800080; '>;</span>
-    E<span style='color:#808030; '>[</span>size<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>value <span style='color:#808030; '>=</span> value<span style='color:#800080; '>;</span>
-    E<span style='color:#808030; '>[</span>size<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>f <span style='color:#808030; '>=</span> capacity<span style='color:#800080; '>;</span>
-    E<span style='color:#808030; '>[</span>size<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>next <span style='color:#808030; '>=</span> headIndex<span style='color:#808030; '>[</span>from<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-    headIndex<span style='color:#808030; '>[</span>from<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> size<span style='color:#800080; '>;</span>
-    size<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-<span style='color:#800000; font-weight:bold; '>void</span> addEdge<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> from<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> to<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> value<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> capacity<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-    addEdge1<span style='color:#808030; '>(</span>from<span style='color:#808030; '>,</span> to<span style='color:#808030; '>,</span> value<span style='color:#808030; '>,</span> capacity<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-    addEdge1<span style='color:#808030; '>(</span>to<span style='color:#808030; '>,</span> from<span style='color:#808030; '>,</span> <span style='color:#808030; '>-</span>value<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-<span style='color:#800000; font-weight:bold; '>int</span> maxPath<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> source<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> sink<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> numV<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> i<span style='color:#808030; '>,</span> head <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>,</span> tail <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>i<span style='color:#808030; '>=</span><span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span> i<span style='color:#808030; '>&lt;</span>numV<span style='color:#800080; '>;</span> i<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-        used<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-        prev<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> NIL<span style='color:#800080; '>;</span>
-        dist<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#808030; '>-</span>INF<span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-    dist<span style='color:#808030; '>[</span>source<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-    <span style='color:#603000; '>queue</span><span style='color:#808030; '>[</span>tail<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> source<span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span>head <span style='color:#808030; '>&lt;</span> tail<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-        source <span style='color:#808030; '>=</span> <span style='color:#603000; '>queue</span><span style='color:#808030; '>[</span>head<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-        used<span style='color:#808030; '>[</span>source<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-        i <span style='color:#808030; '>=</span> headIndex<span style='color:#808030; '>[</span>source<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span>i <span style='color:#808030; '>!</span><span style='color:#808030; '>=</span> NIL<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-            <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>f <span style='color:#808030; '>></span> <span style='color:#008c00; '>0</span> <span style='color:#808030; '>&amp;</span><span style='color:#808030; '>&amp;</span> dist<span style='color:#808030; '>[</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#808030; '>]</span> <span style='color:#808030; '>&lt;</span> dist<span style='color:#808030; '>[</span>source<span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>value<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-                dist<span style='color:#808030; '>[</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> dist<span style='color:#808030; '>[</span>source<span style='color:#808030; '>]</span> <span style='color:#808030; '>+</span> E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>value<span style='color:#800080; '>;</span>
-                prev<span style='color:#808030; '>[</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> i<span style='color:#800080; '>;</span>
-                <span style='color:#800000; font-weight:bold; '>if</span><span style='color:#808030; '>(</span><span style='color:#808030; '>!</span>used<span style='color:#808030; '>[</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#808030; '>]</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-                    <span style='color:#603000; '>queue</span><span style='color:#808030; '>[</span>tail<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#800080; '>;</span>
-                    used<span style='color:#808030; '>[</span>E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>to<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> <span style='color:#008c00; '>1</span><span style='color:#800080; '>;</span>
-                <span style='color:#800080; '>}</span>
-            <span style='color:#800080; '>}</span>
-            i <span style='color:#808030; '>=</span> E<span style='color:#808030; '>[</span>i<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>next<span style='color:#800080; '>;</span>
-        <span style='color:#800080; '>}</span>
-        head<span style='color:#808030; '>+</span><span style='color:#808030; '>+</span><span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-    <span style='color:#800000; font-weight:bold; '>return</span> dist<span style='color:#808030; '>[</span>sink<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-<span style='color:#800000; font-weight:bold; '>int</span> maxValueFlow<span style='color:#808030; '>(</span><span style='color:#800000; font-weight:bold; '>int</span> source<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> sink<span style='color:#808030; '>,</span> <span style='color:#800000; font-weight:bold; '>int</span> numV<span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-    <span style='color:#800000; font-weight:bold; '>int</span> path<span style='color:#808030; '>,</span> v<span style='color:#808030; '>,</span> augment<span style='color:#808030; '>,</span> value<span style='color:#808030; '>,</span> ret <span style='color:#808030; '>=</span> <span style='color:#008c00; '>0</span><span style='color:#800080; '>;</span>
-    <span style='color:#800000; font-weight:bold; '>while</span><span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>value <span style='color:#808030; '>=</span> maxPath<span style='color:#808030; '>(</span>source<span style='color:#808030; '>,</span> sink<span style='color:#808030; '>,</span> numV<span style='color:#808030; '>)</span><span style='color:#808030; '>)</span> <span style='color:#808030; '>></span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-        augment <span style='color:#808030; '>=</span> INF<span style='color:#800080; '>;</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>v<span style='color:#808030; '>=</span>sink<span style='color:#800080; '>;</span> v<span style='color:#808030; '>!</span><span style='color:#808030; '>=</span>source<span style='color:#800080; '>;</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-            path <span style='color:#808030; '>=</span> prev<span style='color:#808030; '>[</span>v<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-            augment <span style='color:#808030; '>=</span> MIN<span style='color:#808030; '>(</span>augment<span style='color:#808030; '>,</span> E<span style='color:#808030; '>[</span>path<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>f<span style='color:#808030; '>)</span><span style='color:#800080; '>;</span>
-            v <span style='color:#808030; '>=</span> E<span style='color:#808030; '>[</span>path<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>from<span style='color:#800080; '>;</span>
-        <span style='color:#800080; '>}</span>
-        <span style='color:#800000; font-weight:bold; '>for</span><span style='color:#808030; '>(</span>v<span style='color:#808030; '>=</span>sink<span style='color:#800080; '>;</span> v<span style='color:#808030; '>!</span><span style='color:#808030; '>=</span>source<span style='color:#800080; '>;</span> <span style='color:#808030; '>)</span><span style='color:#800080; '>{</span>
-            path <span style='color:#808030; '>=</span> prev<span style='color:#808030; '>[</span>v<span style='color:#808030; '>]</span><span style='color:#800080; '>;</span>
-            E<span style='color:#808030; '>[</span>path<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>f <span style='color:#808030; '>-</span><span style='color:#808030; '>=</span> augment<span style='color:#800080; '>;</span>
-            E<span style='color:#808030; '>[</span>path<span style='color:#808030; '>^</span><span style='color:#008c00; '>1</span><span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>f <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> augment<span style='color:#800080; '>;</span>
-            v <span style='color:#808030; '>=</span> E<span style='color:#808030; '>[</span>path<span style='color:#808030; '>]</span><span style='color:#808030; '>.</span>from<span style='color:#800080; '>;</span>
-        <span style='color:#800080; '>}</span>
-        ret <span style='color:#808030; '>+</span><span style='color:#808030; '>=</span> value<span style='color:#808030; '>*</span>augment<span style='color:#800080; '>;</span>
-    <span style='color:#800080; '>}</span>
-    <span style='color:#800000; font-weight:bold; '>return</span> ret<span style='color:#800080; '>;</span>
-<span style='color:#800080; '>}</span>
-</pre>
+    /*solve*/
+    printf("%d\n", maxValueFlow(source, sink, numV+2));
+    return 0;
+}
+void addEdge1(int from, int to, int value, int capacity){
+    E[size].from = from;
+    E[size].to = to;
+    E[size].value = value;
+    E[size].f = capacity;
+    E[size].next = headIndex[from];
+    headIndex[from] = size;
+    size++;
+}
+void addEdge(int from, int to, int value, int capacity){
+    addEdge1(from, to, value, capacity);
+    addEdge1(to, from, -value, 0);
+}
+int maxPath(int source, int sink, int numV){
+    int i, head = 0, tail = 0;
+    for(i=0; i<numV; i++){
+        used[i] = 0;
+        prev[i] = NIL;
+        dist[i] = -INF;
+    }
+    dist[source] = 0;
+    queue[tail++] = source;
+    while(head < tail){
+        source = queue[head];
+        used[source] = 0;
+        i = headIndex[source];
+        while(i != NIL){
+            if(E[i].f > 0 && dist[E[i].to] < dist[source] + E[i].value){
+                dist[E[i].to] = dist[source] + E[i].value;
+                prev[E[i].to] = i;
+                if(!used[E[i].to]){
+                    queue[tail++] = E[i].to;
+                    used[E[i].to] = 1;
+                }
+            }
+            i = E[i].next;
+        }
+        head++;
+    }
+    return dist[sink];
+}
+int maxValueFlow(int source, int sink, int numV){
+    int path, v, augment, value, ret = 0;
+    while((value = maxPath(source, sink, numV)) > 0){
+        augment = INF;
+        for(v=sink; v!=source; ){
+            path = prev[v];
+            augment = MIN(augment, E[path].f);
+            v = E[path].from;
+        }
+        for(v=sink; v!=source; ){
+            path = prev[v];
+            E[path].f -= augment;
+            E[path^1].f += augment;
+            v = E[path].from;
+        }
+        ret += value*augment;
+    }
+    return ret;
+}
+```

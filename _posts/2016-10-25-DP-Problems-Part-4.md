@@ -3,6 +3,7 @@ layout: post
 title: 动态规划专练（四）
 categories: [NOI, 动态规划]
 description: 老文章
+mini-description: 对半吧，写这都快成偷懒的理由了
 keywords: C++, 动态规划
 ---
 
@@ -47,26 +48,27 @@ NOIP2005普及组第三题，也就是背包问题中的01背包。
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">1000</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
+const int up=1000 +5;
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> t<span style="color:#808030;">,</span>m<span style="color:#808030;">,</span>ti<span style="color:#808030;">,</span>vi<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>f<span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> f<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span> <span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>t<span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>m<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">while</span><span style="color:#808030;">(</span>m<span style="color:#808030;">-</span><span style="color:#808030;">-</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-        <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span> <span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>ti<span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>vi<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span>t<span style="color:#800080;">;</span>i<span style="color:#808030;">&gt;</span><span style="color:#808030;">=</span>ti<span style="color:#800080;">;</span>i<span style="color:#808030;">-</span><span style="color:#808030;">-</span><span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span>ti<span style="color:#808030;">]</span><span style="color:#808030;">+</span>vi<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#0f69ff;">\n</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>t<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+int main()
+{
+    int t,m,ti,vi,f[up];
+    memset(f,0,sizeof f);
+    scanf("%d %d",&t,&m);
+    while(m--)
+    {
+        scanf("%d %d",&ti,&vi);
+        for(int i=t;i>=ti;i--) f[i]=max(f[i],f[i-ti]+vi);
+    }
+    printf("%d\n",f[t]);
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
-
+    return 0;
+}
+```
 
 对于 背包问题，我个人是这么认为的：
 
@@ -112,37 +114,39 @@ n&lt;=20，|xi|,|yi|,|zi|&lt;=10000。
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">20</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">double</span> inf<span style="color:#808030;">=</span><span style="color:#008000;">1e10</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">struct</span> node
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> x<span style="color:#808030;">,</span>y<span style="color:#808030;">,</span>z<span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span> g<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> n<span style="color:#808030;">,</span>k<span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">double</span> f<span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span><span style="color:#696969;">//二进制集合表示状态</span>
+const int up=20 +5;
+const double inf=1e10;
+struct node
+{
+    int x,y,z;
+} g[up];
+int n,k;
+double f[1<<up];//二进制集合表示状态
 
-<span style="color:#800000;font-weight:bold;">double</span> dis<span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#603000;">sqrt</span><span style="color:#808030;">(</span><span style="color:#808030;">(</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">double</span><span style="color:#808030;">)</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>x<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>x<span style="color:#808030;">)</span><span style="color:#808030;">*</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>x<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>x<span style="color:#808030;">)</span><span style="color:#808030;">+</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>y<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>y<span style="color:#808030;">)</span><span style="color:#808030;">*</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>y<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>y<span style="color:#808030;">)</span><span style="color:#808030;">+</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>z<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>z<span style="color:#808030;">)</span><span style="color:#808030;">*</span><span style="color:#808030;">(</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>z<span style="color:#808030;">-</span>g<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">.</span>z<span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span>
+double dis(int i,int j)
+{
+    return sqrt(((double)(g[i].x-g[j].x)*(g[i].x-g[j].x)+(g[i].y-g[j].y)*(g[i].y-g[j].y)+(g[i].z-g[j].z)*(g[i].z-g[j].z)));
+}
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>n<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span> <span style="color:#007997;">%d</span> <span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>x<span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>y<span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>g<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>z<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>n<span style="color:#808030;">)</span><span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-    f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span>inf<span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span>k<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#800080;">;</span>k<span style="color:#808030;">&lt;</span>n<span style="color:#800080;">;</span>k<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>i<span style="color:#808030;">&amp;</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>k<span style="color:#808030;">)</span><span style="color:#808030;">)</span> <span style="color:#800000;font-weight:bold;">break</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">(</span>k<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span>n<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>i<span style="color:#808030;">&amp;</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>j<span style="color:#808030;">)</span><span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">min</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">,</span>dis<span style="color:#808030;">(</span>k<span style="color:#808030;">,</span>j<span style="color:#808030;">)</span><span style="color:#808030;">+</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">^</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>j<span style="color:#808030;">)</span><span style="color:#808030;">^</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>k<span style="color:#808030;">)</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%.2lf</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span><span style="color:#808030;">(</span><span style="color:#008c00;">1</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>n<span style="color:#808030;">)</span><span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+int main()
+{
+    scanf("%d",&n);
+    for(int i=0;i<n;i++) scanf("%d %d %d",&g[i].x,&g[i].y,&g[i].z);
+    for(int i=1;i<(1<<n);i++)
+    {
+    f[i]=inf;
+    for(k=0;k<n;k++) if(i&(1<<k)) break;
+    for(int j(k+1);j<n;j++) if(i&(1<<j)) f[i]=min(f[i],dis(k,j)+f[i^(1<<j)^(1<<k)]);
+    }
+    printf("%.2lf",f[(1<<n)-1]);
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    return 0;
+}
+```
 
 
 代码本身没有什么亮点，但有一处值得注意，当遇到集合DP时可以考虑使用二进制代表集合。

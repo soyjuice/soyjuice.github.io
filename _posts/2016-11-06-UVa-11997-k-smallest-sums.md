@@ -3,6 +3,7 @@ layout: post
 title: UVa 11997 K Smallest Sums
 categories: [NOI, 多路归并]
 description: 老文章
+mini-description: 这个是目前最有趣的博文
 keywords: C++, 多路归并, 暴力
 ---
 

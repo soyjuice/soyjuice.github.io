@@ -3,6 +3,7 @@ layout: post
 title: Pre:从零开始的游戏人生(一)
 categories: [C++, 学习笔记]
 description: 游戏编程
+mini-description: 从今天起，我会零零星星更新这个分类。我从开始学编程，很大一部分目的就是为了去学习游戏编程，至于到现在，我才决定开始接触
 keywords: C++, 学习笔记
 ---
 

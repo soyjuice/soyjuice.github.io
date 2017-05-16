@@ -1,8 +1,9 @@
 ---
 layout: post
-title: 论博客与竞赛学习的关系
+title: 论博客与学习的关系
 categories: [Blog, NOI]
 description: 作死
+mini-description: 俗话说的好，人无完人，但会完蛋（玩丹dan）
 keywords: C++, Pascal
 ---
 

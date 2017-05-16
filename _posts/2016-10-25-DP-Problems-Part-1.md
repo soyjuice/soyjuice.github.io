@@ -3,6 +3,7 @@ layout: post
 title: 动态规划专练（一）
 categories: [NOI, 动态规划]
 description: 老文章
+mini-description: 一些非常简单的DP
 keywords: C++, 动态规划
 ---
 
@@ -50,38 +51,39 @@ keywords: C++, 动态规划
 
 **代码**：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">30</span><span style="color:#800080;">;</span>
-<span style="color:#603000;">vector</span> ve<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> f<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+const int up=30;
+vector ve[up];
+int f[up][up];
 
-<span style="color:#800000;font-weight:bold;">int</span> dfs<span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> x<span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">int</span> y<span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>x<span style="color:#808030;">]</span><span style="color:#808030;">[</span>y<span style="color:#808030;">]</span><span style="color:#808030;">)</span> <span style="color:#800000;font-weight:bold;">return</span> f<span style="color:#808030;">[</span>x<span style="color:#808030;">]</span><span style="color:#808030;">[</span>y<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">return</span> f<span style="color:#808030;">[</span>x<span style="color:#808030;">]</span><span style="color:#808030;">[</span>y<span style="color:#808030;">]</span><span style="color:#808030;">=</span>ve<span style="color:#808030;">[</span>x<span style="color:#808030;">]</span><span style="color:#808030;">[</span>y<span style="color:#808030;">]</span><span style="color:#808030;">+</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>dfs<span style="color:#808030;">(</span>x<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>y<span style="color:#808030;">)</span><span style="color:#808030;">,</span>dfs<span style="color:#808030;">(</span>x<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>y<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span>
+int dfs(int x,int y)
+{
+    if(f[x][y]) return f[x][y];
+    return f[x][y]=ve[x][y]+max(dfs(x+1,y),dfs(x+1,y+1));
+}
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#696969;">//freopen("djs.in","r",stdin);</span>
-    <span style="color:#696969;">//freopen("djs.out","w",stdout);</span>
-    <span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span>j<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span>n<span style="color:#808030;">,</span>m<span style="color:#800080;">;</span>
+int main()
+{
+    //freopen("djs.in","r",stdin);
+    //freopen("djs.out","w",stdout);
+    int i=0,j=0,n,m;
 
-    <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>n<span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span>i<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span>j<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>i<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>       
-    <span style="color:#800080;">{</span>           
-        <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>m<span style="color:#800080;">;</span>
-        ve<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">.</span>push_back<span style="color:#808030;">(</span>m<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>i<span style="color:#808030;">=</span><span style="color:#808030;">=</span>n<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">=</span>m<span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#603000;">cout</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>dfs<span style="color:#808030;">(</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">)</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span><span style="color:#603000;">endl</span><span style="color:#800080;">;</span> 
+    cin>>n;
+    for(i=0;i<n;i++)
+    for(j=0;j<=i;j++)       
+    {           
+        cin>>m;
+        ve[i].push_back(m);
+        if(i==n-1) f[i][j]=m;
+    }
+    cout<<dfs(0,0)<<endl; 
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
-
+    return 0;
+}
+```
 
 # 2.方格取数
 
@@ -151,36 +153,37 @@ NOIP 2000 提高组第四题
 
 **代码**：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">int</span> n<span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> a<span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">=</span> <span style="color:#800080;">{</span><span style="color:#008c00;">0</span><span style="color:#800080;">}</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> f<span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span><span style="color:#008c00;">10</span><span style="color:#808030;">]</span><span style="color:#808030;">=</span> <span style="color:#800080;">{</span><span style="color:#008c00;">0</span><span style="color:#800080;">}</span><span style="color:#800080;">;</span>
+int n;
+int a[10][10]= {0};
+int f[10][10][10][10]= {0};
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span> 
-<span style="color:#800080;">{</span>
-    <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>n<span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">while</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">true</span><span style="color:#808030;">)</span> 
-    <span style="color:#800080;">{</span>
-        <span style="color:#800000;font-weight:bold;">int</span> x<span style="color:#808030;">,</span>y<span style="color:#808030;">,</span>z<span style="color:#800080;">;</span>
-        <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>x<span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>y<span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>z<span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>x<span style="color:#808030;">=</span><span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#808030;">)</span> <span style="color:#800000;font-weight:bold;">break</span><span style="color:#800080;">;</span>
-        a<span style="color:#808030;">[</span>x<span style="color:#808030;">]</span><span style="color:#808030;">[</span>y<span style="color:#808030;">]</span><span style="color:#808030;">=</span>z<span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> 
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> 
-            <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> k<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>k<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>k<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> 
-                <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> l<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>l<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>l<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> 
-                <span style="color:#800080;">{</span>
-                    f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">+</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span> <span style="color:#808030;">(</span>i<span style="color:#808030;">!</span><span style="color:#808030;">=</span>k <span style="color:#808030;">&amp;</span><span style="color:#808030;">&amp;</span> j<span style="color:#808030;">!</span><span style="color:#808030;">=</span>l<span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">+</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                <span style="color:#800080;">}</span>
-    <span style="color:#603000;">cout</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>f<span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span><span style="color:#603000;">endl</span><span style="color:#800080;">;</span>
+int main() 
+{
+    cin>>n;
+    while(true) 
+    {
+        int x,y,z;
+        cin>>x>>y>>z;
+        if(x==0) break;
+        a[x][y]=z;
+    }
+    for(int i=1;i<=n;i++) 
+        for(int j=1;j<=n;j++) 
+            for(int k=1;k<=n;k++) 
+                for(int l=1;l<=n;l++) 
+                {
+                    f[i][j][k][l]=max(max(f[i-1][j][k-1][l],f[i-1][j][k][l-1]),max(f[i][j-1][k-1][l],f[i][j-1][k][l-1]))+a[i][j];
+                    if (i!=k && j!=l) f[i][j][k][l]+=a[i][j];
+                }
+    cout<<f[n][n][n][n]<<endl;
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
-
+    return 0;
+}
+```
 
 # 3.传纸条
 
@@ -233,27 +236,29 @@ NOIP 2008提高组第三题
 
 **代码**：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">55</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> ans<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>dis<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+const int up=55;
+int ans[up][up],dis[up][up][up][up];
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> n<span style="color:#808030;">,</span>m<span style="color:#800080;">;</span>
-    <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>m<span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>n<span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>m<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span> <span style="color:#603000;">cin</span><span style="color:#808030;">&gt;</span><span style="color:#808030;">&gt;</span>ans<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>m<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-            <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> k<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>k<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>m<span style="color:#800080;">;</span>k<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-                <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> l<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>l<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>n<span style="color:#800080;">;</span>l<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-                <span style="color:#800080;">{</span>
-                    dis<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>dis<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">,</span>dis<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">,</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>dis<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">,</span>dis<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span><span style="color:#808030;">+</span>ans<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                    <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>i<span style="color:#808030;">!</span><span style="color:#808030;">=</span>k <span style="color:#808030;">&amp;</span><span style="color:#808030;">&amp;</span> j<span style="color:#808030;">!</span><span style="color:#808030;">=</span>l<span style="color:#808030;">)</span> dis<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">+</span><span style="color:#808030;">=</span>ans<span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-                <span style="color:#800080;">}</span>
-    <span style="color:#603000;">cout</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span>dis<span style="color:#808030;">[</span>m<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">[</span>m<span style="color:#808030;">]</span><span style="color:#808030;">[</span>n<span style="color:#808030;">]</span><span style="color:#808030;">&lt;</span><span style="color:#808030;">&lt;</span><span style="color:#603000;">endl</span><span style="color:#800080;">;</span>
+int main()
+{
+    int n,m;
+    cin>>m>>n;
+    for(int i=1;i<=m;i++)
+        for(int j=1;j<=n;j++) cin>>ans[i][j];
+    for(int i=1;i<=m;i++)
+        for(int j=1;j<=n;j++)
+            for(int k=1;k<=m;k++)
+                for(int l=1;l<=n;l++)
+                {
+                    dis[i][j][k][l]=max(max(dis[i-1][j][k-1][l],dis[i-1][j][k][l-1]),max(dis[i][j-1][k-1][l],dis[i][j-1][k][l-1]))+ans[i][j];
+                    if(i!=k && j!=l) dis[i][j][k][l]+=ans[k][l];
+                }
+    cout<<dis[m][n][m][n]<<endl;
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    return 0;
+}
+```

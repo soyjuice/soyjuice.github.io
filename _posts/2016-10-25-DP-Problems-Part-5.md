@@ -3,6 +3,7 @@ layout: post
 title: 动态规划专练（五）
 categories: [NOI, 动态规划]
 description: 老文章
+mini-description: 一些很常见的DP
 keywords: C++, 动态规划
 ---
 
@@ -44,30 +45,32 @@ abc123abc
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">5000</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">char</span> a<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>b<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span><span style="color:#800000;font-weight:bold;">int</span> k<span style="color:#808030;">,</span>l<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span><span style="color:#008c00;">2</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>T<span style="color:#800080;">;</span>
+const int up=5000 +5;
+char a[up],b[up];int k,l,f[2][up],T;
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>T<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">while</span><span style="color:#808030;">(</span>T<span style="color:#808030;">-</span><span style="color:#808030;">-</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-        <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span><span style="color:#008c00;">0</span><span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> f<span style="color:#808030;">[</span><span style="color:#008c00;">0</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> f<span style="color:#808030;">[</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%s</span> <span style="color:#007997;">%s</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>a<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>b<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        k<span style="color:#808030;">=</span><span style="color:#603000;">strlen</span><span style="color:#808030;">(</span>a<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#808030;">,</span>l<span style="color:#808030;">=</span><span style="color:#603000;">strlen</span><span style="color:#808030;">(</span>b<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>k<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-            <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> j<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>j<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>l<span style="color:#800080;">;</span>j<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-                <span style="color:#800000;font-weight:bold;">if</span><span style="color:#808030;">(</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#808030;">=</span>b<span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">)</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">=</span>f<span style="color:#808030;">[</span><span style="color:#808030;">(</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>
-                <span style="color:#800000;font-weight:bold;">else</span> f<span style="color:#808030;">[</span>i<span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>f<span style="color:#808030;">[</span><span style="color:#808030;">(</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">)</span><span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">]</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>j<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#0f69ff;">\n</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>k<span style="color:#808030;">&amp;</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">[</span>l<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
+int main()
+{
+    scanf("%d",&T);
+    while(T--)
+    {
+        memset(f[0],0,sizeof f[0]);
+        memset(f[1],0,sizeof f[1]);
+        scanf("%s %s",a+1,b+1);
+        k=strlen(a+1),l=strlen(b+1);
+        for(int i=1;i<=k;i++)
+            for(int j=1;j<=l;j++)
+                if(a[i]==b[j]) f[i&1][j]=f[(i-1)&1][j-1]+1;
+                else f[i&1][j]=max(f[(i-1)&1][j],f[i&1][j-1]);
+        printf("%d\n",f[k&1][l]);
+    }
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    return 0;
+}
+```
 
 
 如果是直接开5000*5000的数组，内存是不够的，所以要用滚动数组进行优化。
@@ -115,34 +118,36 @@ abklmncdefg
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">10000</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> T<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>g<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">char</span> a<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+const int up=10000 +5;
+int T,f[up],g[up];
+char a[up];
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> k<span style="color:#808030;">,</span>l<span style="color:#808030;">,</span>maxn<span style="color:#808030;">=</span><span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>T<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">while</span><span style="color:#808030;">(</span>T<span style="color:#808030;">-</span><span style="color:#808030;">-</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-        <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>g<span style="color:#808030;">,</span><span style="color:#008000;">0x7f</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> g<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#603000;">memset</span><span style="color:#808030;">(</span>f<span style="color:#808030;">,</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span><span style="color:#800000;font-weight:bold;">sizeof</span> f<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        maxn<span style="color:#808030;">=</span><span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>
-        <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%s</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>a<span style="color:#808030;">)</span><span style="color:#800080;">;</span>l<span style="color:#808030;">=</span><span style="color:#603000;">strlen</span><span style="color:#808030;">(</span>a<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">0</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span>l<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-        <span style="color:#800080;">{</span>
-            k<span style="color:#808030;">=</span><span style="color:#603000;">lower_bound</span><span style="color:#808030;">(</span>g<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>g<span style="color:#808030;">+</span>l<span style="color:#808030;">+</span><span style="color:#008c00;">1</span><span style="color:#808030;">,</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">-</span>g<span style="color:#800080;">;</span>
-            f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span>k<span style="color:#800080;">;</span>
-            g<span style="color:#808030;">[</span>k<span style="color:#808030;">]</span><span style="color:#808030;">=</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-            maxn<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>maxn<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-        <span style="color:#800080;">}</span>
-        <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#0f69ff;">\n</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>maxn<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+int main()
+{
+    int k,l,maxn=-1;
+    scanf("%d",&T);
+    while(T--)
+    {
+        memset(g,0x7f,sizeof g);
+        memset(f,0,sizeof f);
+        maxn=-1;
+        scanf("%s",a);l=strlen(a);
+        for(int i=0;i<l;i++)
+        {
+            k=lower_bound(g+1,g+l+1,a[i])-g;
+            f[i]=k;
+            g[k]=a[i];
+            maxn=max(maxn,f[i]);
+        }
+        printf("%d\n",maxn);
+    }
+    return 0;
+}
+```
 
 
 假设有两个状态a,b满足Aa&lt;Ab且d(a)=d(b)，则对于后续所有的状态，b都不会比a更优。
@@ -184,23 +189,25 @@ n≤1000
 
 代码：
 
-<pre style="color:#000000;background:transparent;"><span style="color:#004a43;">#</span><span style="color:#004a43;">include</span><span style="color:#800000;">&lt;</span><span style="color:#40015a;">bits/stdc++.h</span><span style="color:#800000;">&gt;</span>
-<span style="color:#800000;font-weight:bold;">using</span> <span style="color:#800000;font-weight:bold;">namespace</span> <span style="color:#666616;">std</span><span style="color:#800080;">;</span>
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-<span style="color:#800000;font-weight:bold;">const</span> <span style="color:#800000;font-weight:bold;">int</span> up<span style="color:#808030;">=</span><span style="color:#008c00;">1000</span> <span style="color:#808030;">+</span><span style="color:#008c00;">5</span><span style="color:#800080;">;</span>
-<span style="color:#800000;font-weight:bold;">int</span> T<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#808030;">,</span>a<span style="color:#808030;">[</span>up<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
+const int up=1000 +5;
+int T,f[up],a[up];
 
-<span style="color:#800000;font-weight:bold;">int</span> <span style="color:#400000;">main</span><span style="color:#808030;">(</span><span style="color:#808030;">)</span>
-<span style="color:#800080;">{</span>
-    <span style="color:#800000;font-weight:bold;">int</span> maxn<span style="color:#808030;">=</span><span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>T<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800000;font-weight:bold;">for</span><span style="color:#808030;">(</span><span style="color:#800000;font-weight:bold;">int</span> i<span style="color:#808030;">=</span><span style="color:#008c00;">1</span><span style="color:#800080;">;</span>i<span style="color:#808030;">&lt;</span><span style="color:#808030;">=</span>T<span style="color:#800080;">;</span>i<span style="color:#808030;">+</span><span style="color:#808030;">+</span><span style="color:#808030;">)</span>
-    <span style="color:#800080;">{</span>
-    <span style="color:#603000;">scanf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span><span style="color:#808030;">&amp;</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span><span style="color:#008c00;">0</span><span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">-</span><span style="color:#008c00;">1</span><span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#808030;">+</span>a<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#800080;">;</span>
-    maxn<span style="color:#808030;">=</span><span style="color:#603000;">max</span><span style="color:#808030;">(</span>maxn<span style="color:#808030;">,</span>f<span style="color:#808030;">[</span>i<span style="color:#808030;">]</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
-    <span style="color:#800080;">}</span>
-    <span style="color:#603000;">printf</span><span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#007997;">%d</span><span style="color:#0f69ff;">\n</span><span style="color:#800000;">"</span><span style="color:#808030;">,</span>maxn<span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+int main()
+{
+    int maxn=-1;
+    scanf("%d",&T);
+    for(int i=1;i<=T;i++)
+    {
+    scanf("%d",&a[i]);
+    f[i]=max(0,f[i-1])+a[i];
+    maxn=max(maxn,f[i]);
+    }
+    printf("%d\n",maxn);
 
-    <span style="color:#800000;font-weight:bold;">return</span> <span style="color:#008c00;">0</span><span style="color:#800080;">;</span>
-<span style="color:#800080;">}</span></pre>
+    return 0;
+}
+```
