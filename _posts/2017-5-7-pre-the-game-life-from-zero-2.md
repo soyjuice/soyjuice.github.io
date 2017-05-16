@@ -3,6 +3,7 @@ layout: post
 title: Pre:从零开始的游戏人生(二)
 categories: [C++, 学习笔记]
 description: 游戏编程
+mini-description: 继上一篇，继续学习。
 keywords: C++, 学习笔记
 ---
 
