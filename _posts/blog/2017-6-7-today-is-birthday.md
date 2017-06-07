@@ -5,6 +5,7 @@ categories: [Blog]
 description: 心语
 mini-description: 好想说点什么有的没的
 keywords: C++
+toc: false
 ---
 
 又到了这一天，五月十三（阳历6.7），我又长大了一岁。
@@ -27,4 +28,6 @@ keywords: C++
 
 下图：
 
-![中国传媒大学](http://soyjuice.usa3v.net/zhong-chuan.jpg)
+<img src="http://soyjuice.usa3v.net/zhong-chuan.jpg" width = "200" height = "200" alt="中国传媒大学" />
+
+所以，向着目标进发吧！
