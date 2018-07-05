@@ -11,7 +11,7 @@
           {% endif %}
         {% endif %}
         {% if load_disqus %}
-          <div id="disqus_thread"></div>
+          <!-- <div id="disqus_thread"></div>
           <script>
             var disqus_config = function () {
               this.page.url = '{{ site.url }}{{ page.url }}';
@@ -31,7 +31,20 @@
               (d.head || d.body).appendChild(s);
             })();
           </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+          <!-- Gitalk评论框 -->
+          <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+          <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+          <script>
+          var gitalk = new Gitalk({
+              clientID: 'd311bbed6f7a1e4156e2',
+              clientSecret: '57a2de9ea41a9976d4f708d1fca4232212f4b88e',
+              repo: 'blog-comments',
+              owner: 'SoyJuice',
+              admin: ['SoyJuice'],
+          })
+          gitalk.render('gitalk-container')
+          </script>
         {% endif %}
         {% if site.lazy_load_duoshuo and site.duoshuo_username %}
         <a href="#" class="show_duoshuo_comment" onclick="return false;" style="color:rgba(30,55,70,.4);font-size:0.75em;">想留言却没看到评论框？点这里。</a>
