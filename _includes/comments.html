@@ -36,14 +36,14 @@
           <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
           <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
           <script>
-          var gitalk = new Gitalk({
+            var gitalk = new Gitalk({
               clientID: 'd311bbed6f7a1e4156e2',
               clientSecret: '57a2de9ea41a9976d4f708d1fca4232212f4b88e',
               repo: 'blog-comments',
               owner: 'SoyJuice',
-              admin: ['SoyJuice'],
-          })
-          gitalk.render('gitalk-container')
+              admin: ['SoyJuice']
+            })
+            gitalk.render('gitalk-container')
           </script>
         {% endif %}
         {% if site.lazy_load_duoshuo and site.duoshuo_username %}
