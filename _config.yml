@@ -17,8 +17,8 @@ side_bar_repo_limit: 5
 #      Author      #
 # ---------------- #
 author: Soy Juice
-organization: Handan NO.1 School, Sch.
-organization_url: http://www.handanyz.com/
+organization: UESTC(Possible), Sch.
+organization_url: http://www.uestc.edu.cn/
 location: Handan, China
 email: wly1316692979@gmail.com
 
@@ -110,6 +110,6 @@ lazy_load_duoshuo: false
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [C++, Pascal]
+skill_software_keywords: [C++, Pascal, HTML, PHP]
 # skill_mobile_app_keywords: [Android, Reverse Engineering]
 # skill_windows_keywords: [Win32 SDK, DuiLib, WTL, COM, WinDbg]
