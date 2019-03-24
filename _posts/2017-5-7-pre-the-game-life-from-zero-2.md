@@ -3,7 +3,7 @@ layout: post
 title: Pre:从零开始的游戏人生(二)
 categories: [C++, 学习笔记]
 description: 游戏编程
-mini-description: 继上一篇，继续学习。
+mini-description: 继上一篇，继续学习
 keywords: C++, 学习笔记
 ---
 
@@ -191,10 +191,10 @@ ATON WINAPI RegisterClassEX(
 就好像注册某个网站的账号，填完注册信息后，当然要选择完成注册一样，设计好窗口类后，需要对其进行注册(使用窗口类声明的类名)
 
 ``` cpp
-RegisterClassEX(&wndClass);
+RegisterClassEx(&wndClass);
 ```
 
-另外，由于我们使用的是升级版（+EX），注册的函数也是升级版（+EX）。
+另外，由于我们使用的是升级版（+EX），注册的函数也是升级版（+Ex）。
 
 ### 窗口的正式创建
 
@@ -225,14 +225,26 @@ HWND WINAPI CreateWindow(
 );
 ```
 
-偷懒写在代码上的感觉真好~
+偷懒把讲解写在代码上的感觉真好~
+
+另外，CreateWindow也有Ex后缀的CreateWindowEx，在最前面加了一个参数`DWORD dwExStyle`
 
 代码上就这么写好了：
 
 ``` cpp
-HWND hWnd = CreateWindow("This is a test",
+HWND hWnd = CreateWindow("This is a test", 
     "This is a test",
     WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800,
+    600, NULL, NULL, hInstance, NULL
+);
+```
+
+和
+
+``` cpp
+HWND hWnd = CreateWindowEx(WS_EX_CLIENTEDGE, "This is a test", 
+    "This is a test", 
+    WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 
     600, NULL, NULL, hInstance, NULL
 );
 ```
