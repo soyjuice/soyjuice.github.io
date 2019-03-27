@@ -53,6 +53,11 @@ keywords: Markdown
 
 * 无序列表项 3
 
+```
+- [x] 任务列表 1
+- [ ] 任务列表 2
+```
+
 - [x] 任务列表 1
 - [ ] 任务列表 2
 
@@ -132,6 +137,12 @@ print 'Hello, World!'
 * [目录](#目录)
 
 ### Emoji
+
+```
+:camel:
+:blush:
+:smile:
+```
 
 :camel:
 :blush:
