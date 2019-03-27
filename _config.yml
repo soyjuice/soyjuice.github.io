@@ -110,6 +110,6 @@ lazy_load_duoshuo: false
 # ---------------- #
 #      Datas       #
 # ---------------- #
-skill_software_keywords: [C++, Pascal, HTML, PHP]
+skill_software_keywords: [C++, Pascal, HTML, Python]
 # skill_mobile_app_keywords: [Android, Reverse Engineering]
 # skill_windows_keywords: [Win32 SDK, DuiLib, WTL, COM, WinDbg]
