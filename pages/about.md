@@ -8,21 +8,22 @@ menu: 关于
 permalink: /about/
 ---
 
-我是Soy Juice。
+我是Soy Juice，追随mz大大，码而生，码而立。
 
-目前大一学生，还在继续努力中。
+跟随着仰慕「优雅编码的艺术」。
 
 ## 坚信
 
 * 作死改变人生
 * 是时间选择我们，而不是我们选择时间
-* 请相信玄学，玄学也能改变人生
 
 ## 联系
 
 * GitHub：[Soy Juice](https://github.com/soyjuice)
 * 博客：[{{ site.title }}]({{ site.url }})
 * 微博：[Soy Juice](http://weibo.com/soyjuice)
+
+另外，也可以在下面的评论区联系我。
 
 <!--* 掘金：[@mzlogin](http://gold.xitu.io/user/570ddaeb2e958a005c63b2da)
 * LinkedIn：[@mazhuang](https://www.linkedin.com/in/mazhuang)-->
