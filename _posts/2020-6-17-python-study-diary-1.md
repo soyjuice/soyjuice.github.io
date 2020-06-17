@@ -1,3 +1,12 @@
+---
+layout: post
+title: Python学习日记1
+categories: [python]
+description: 新文章
+mini-description: 这个是目前最新的博文
+keywords: Python
+---
+
 ### Python学习日记/SoyJuice
 
 #### DAY1 基础
