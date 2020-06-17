@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: http://soyjuice.tk
+url: http://soyjuice.github.io
 date_format: "ordinal"
 title: SoyJuice的小站
 subtitle: "作死改变人生"
