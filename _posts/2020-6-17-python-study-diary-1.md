@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python学习日记1
-categories: [python]
+categories: [Python, 学习笔记]
 description: 新文章
 mini-description: 这个是目前最新的博文
 keywords: Python
@@ -534,4 +534,3 @@ print(scores.pop('骆昊', 100))
 scores.clear()
 print(scores)
 ```
-
