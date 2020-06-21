@@ -285,7 +285,7 @@ if __name__ == '__main__':
 
 关于这俩的关系，比较抽象，不过查看文档之后可以有一个比较直观的看法：
 
-```python
+```
 class object
  |  The most base type
 # 描述甚至只有一句，可能object就像是一个空类，专为继承顶点而设置的
