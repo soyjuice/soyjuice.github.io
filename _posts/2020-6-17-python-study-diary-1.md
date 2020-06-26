@@ -418,7 +418,7 @@ for val in f2:
 
 ```Python
 # 定义元组
-t = ('SoyJuice', 20, True, '四川成都')
+t = ('路人甲', 8, True, '北京')
 print(t)
 # 获取元组中的元素
 print(t[0])
@@ -519,7 +519,6 @@ items2 = dict(zip(['a', 'b', 'c'], '123'))
 items3 = {num: num ** 2 for num in range(1, 10)}
 print(items1, items2, items3)
 # 通过键可以获取字典中对应的值
-print(scores['骆昊'])
 print(scores['狄仁杰'])
 # 对字典中所有键值对进行遍历
 for key in scores:
@@ -536,8 +535,6 @@ print(scores.get('武则天'))
 print(scores.get('武则天', 60))
 # 删除字典中的元素
 print(scores.popitem())
-print(scores.popitem())
-print(scores.pop('骆昊', 100))
 # 清空字典
 scores.clear()
 print(scores)
