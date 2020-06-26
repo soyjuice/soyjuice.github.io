@@ -3,7 +3,7 @@ layout: page
 title: About
 description: SoyJuice小站
 keywords: Soy Juice, 吴林阳
-comments: true
+comments: false
 menu: 关于
 permalink: /about/
 ---
